@@ -4,10 +4,11 @@ const imagemin = require('imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
 const imageminPngquant = require('imagemin-pngquant');
 const slash = require('slash');
+const logs = require('electron-log');
 
 const {app , shell, BrowserWindow, Menu ,ipcMain } = require('electron');
 
-process.env.NODE_ENV = 'development';
+process.env.NODE_ENV = 'production';
 
 const isDev = process.env.NODE_ENV !== 'production' ? true : false;
 const isWin = process.platform=='win32' ? true : false ;
@@ -19,7 +20,7 @@ function createBrowserWindow(){
         title:'Image Scaler',
         height: 600,
         width:isDev ? 800: 500,
-        icon:`${__dirname}/assets/mac/icon.png`,
+        icon: isWin ? `${__dirname}/assets/icons/win/icon.ico`: `${__dirname}/assets/icons/mac/icon.icns` ,
         resizable: false,
         webPreferences: {
             nodeIntegration: true,
@@ -39,7 +40,7 @@ function createAboutWindow(){
     title:'About Image Shrink',
     height: 400,
     width:400,
-    icon:`${__dirname}/assets/mac/icon.png`,
+    icon: isWin ? `${__dirname}/assets/icons/win/icon.ico`: `${__dirname}/assets/icons/mac/icon.icns` ,
     resizable: false,
 })
 
@@ -117,7 +118,7 @@ async function shrinkImage({imgPath,quality,dest}) {
                 ]
             })
 
-            console.log(files);
+            logs.info(files);
             shell.openPath(dest);
 
             mainWindow.webContents.send('image:done');
