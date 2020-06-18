@@ -1,4 +1,4 @@
-const {app , BrowserWindow, Menu  } = require('electron');
+const {app , BrowserWindow, Menu ,ipcMain } = require('electron');
 
 process.env.NODE_ENV = 'development';
 
@@ -90,6 +90,10 @@ app.on('window-all-closed',()=>{
     if (process.platform !== 'darwin'){
         app.quit()
     }
+})
+
+ipcMain.on('image:minimize', (e,options) => {
+    console.log(options);
 })
 
 app.on('activate',()=>{

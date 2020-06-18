@@ -20,4 +20,9 @@ const path = require('path')
 
         console.log(imgPath,quality);
 
+        ipcRenderer.send('image:minimize',{
+            imgPath,
+            quality,
+        });
+
       })
