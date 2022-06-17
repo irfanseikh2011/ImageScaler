@@ -14,7 +14,7 @@
   "author": "Sk Md Irfan",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^9.3.2",
+    "electron": "^15.5.5",
     "electron-packager": "^15.1.0",
     "nodemon": "^2.0.4"
   },
